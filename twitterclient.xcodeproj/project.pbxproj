@@ -294,6 +294,7 @@
 				TargetAttributes = {
 					1321302C1D21C7FD0088C52C = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = L5KFQWNUZW;
 					};
 					132130401D21C7FD0088C52C = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -631,10 +632,13 @@
 			baseConfigurationReference = 4C9F026CDA559177C9426443 /* Pods-twitterclient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = twitterclient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fbucodepath.twitterclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -643,10 +647,13 @@
 			baseConfigurationReference = 07151447891F3E02A7B063A9 /* Pods-twitterclient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = twitterclient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fbucodepath.twitterclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
