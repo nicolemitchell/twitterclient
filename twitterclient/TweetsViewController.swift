@@ -30,6 +30,16 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         // Do any additional setup after loading the view.
         
+        // Set up Infinite Scroll loading indicator
+        let frame = CGRectMake(0, self.FeedTableView.contentSize.height, self.FeedTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+        loadingMoreView = InfiniteScrollActivityView(frame: frame)
+        loadingMoreView!.hidden = true
+        self.FeedTableView.addSubview(loadingMoreView!)
+        
+        var insets = FeedTableView.contentInset;
+        insets.bottom += InfiniteScrollActivityView.defaultHeight;
+        FeedTableView.contentInset = insets
+        
         var nav = self.navigationController?.navigationBar
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .ScaleAspectFit
@@ -56,10 +66,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         FeedTableView.reloadData()
     }
     
-    func viewWillAppear() {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         FeedTableView.reloadData()
     }
-    
+        
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -76,12 +87,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
             self.tweets = tweets
             self.FeedTableView.reloadData()
+            self.isMoreDataLoading = false
 
             //for tweet in tweets {
                 //print(tweet.text)
             //}
+            
+            
             }, failure: { (error: NSError) -> () in
                 print(error.localizedDescription)
+                
+                
         })
     }
     
@@ -212,16 +228,34 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         if segue.identifier == "feedProfileSegue" {
             let button = sender as! UIButton
-            var indexPaths = []
-            indexPaths = FeedTableView.indexPathsForRowsInRect(button.frame)!
-            let indexPath = indexPaths[0]
-            let tweet = tweets[indexPath.row]
+            
+            let contentView = button.superview
+            let cell = contentView!.superview as! UITableViewCell
+            
+            let indexPath = FeedTableView.indexPathForCell(cell)
+            let tweet = tweets[indexPath!.row]
             
             let profileViewController = segue.destinationViewController as! ProfileViewController
             
             profileViewController.tweet = tweet
             
         }
+        
+        if segue.identifier == "feedReplySegue" {
+            let button = sender as! UIButton
+            
+            let contentView = button.superview
+            let cell = contentView!.superview as! UITableViewCell
+            
+            let indexPath = FeedTableView.indexPathForCell(cell)
+            let tweet = tweets[indexPath!.row]
+            
+            let composeViewController = segue.destinationViewController as! ComposeViewController
+            
+            composeViewController.tweet = tweet
+            
+        }
+        
         
     }
     

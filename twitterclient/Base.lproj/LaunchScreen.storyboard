@@ -17,18 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="white bird" translatesAutoresizingMaskIntoConstraints="NO" id="0lT-46-ic1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.14965031240000001" green="0.62959100710000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="TwitterLogo_white" translatesAutoresizingMaskIntoConstraints="NO" id="l6b-rr-hFP">
+                                <rect key="frame" x="118" y="265" width="138" height="138"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="0lT-46-ic1" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="07v-mG-CHU"/>
-                            <constraint firstAttribute="trailing" secondItem="0lT-46-ic1" secondAttribute="trailing" id="2fH-iV-9mS"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="0lT-46-ic1" secondAttribute="bottom" id="4k1-VK-P0o"/>
-                            <constraint firstItem="0lT-46-ic1" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Zbl-es-sMO"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.14965031240000001" green="0.62959100710000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
@@ -38,6 +31,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="white bird" width="259" height="194"/>
+        <image name="TwitterLogo_white" width="1687" height="1687"/>
     </resources>
 </document>
