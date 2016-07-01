@@ -12,6 +12,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     var tweet: Tweet!
     
+    @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var composePlaceholderText: UILabel!
     
     @IBOutlet weak var replyPlaceholderText: UILabel!
@@ -61,8 +63,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         if tweet == nil {
             composePlaceholderText.hidden = false
             replyPlaceholderText.hidden = true
+            nameLabel.hidden = true
         } else {
             replyPlaceholderText.hidden = false
+            nameLabel.text = "\(tweet.name! as! String)"
+            nameLabel.hidden = false
             composePlaceholderText.hidden = true
             textView.text = "@\(tweet.screenname! as! String)"
         }
@@ -75,6 +80,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         var characterCount = 140 - textView.text.characters.count
     characterLabel.text = String(characterCount)
+        
+        if characterCount == 140 {
+            composePlaceholderText.hidden = false
+        }
         
         if characterCount < 0 {
             characterWarning.hidden = false
