@@ -198,9 +198,31 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 loadingMoreView!.startAnimating()
                 
                 // Code to load more results
-                loadData()
+                loadMoreData({ (tweets: [Tweet]) in
+                    self.tweets = tweets
+                    self.isMoreDataLoading = false
+                }, failure: { (error: NSError) in
+                    print(error.localizedDescription)
+                })
             }
         }
+    }
+    
+    func loadMoreData(success: ([Tweet])->(), failure: (NSError) ->()) {
+        
+        TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json", parameters: ["max_id": tweets[tweets.count-1].id], progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let tweetsDictionaries = response as! [NSDictionary]
+            let new_tweets = Tweet.tweetsWithArray(tweetsDictionaries)
+            
+            for tweet in new_tweets {
+                self.tweets.append(tweet)
+            }
+            success(self.tweets)
+            
+        }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+            failure(error)
+        }
+        
     }
     
 
