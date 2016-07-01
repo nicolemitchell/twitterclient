@@ -52,15 +52,19 @@ class TweetCell: UITableViewCell {
     @IBAction func onFavorite(sender: AnyObject) {
         if tweet!.favoriteBool == false {
             tweet?.favorite({
-                self.favoriteButton.selected = true
-                self.favoriteCountLabel.text = String(self.tweet!.favoritesCount)
+                dispatch_async(dispatch_get_main_queue()){
+                    self.favoriteButton.selected = true
+                    self.favoriteCountLabel.text = String(self.tweet!.favoritesCount)
+                }
                 }, failure: { (error: NSError) in
                     
             })
         } else {
             tweet?.unfavorite({
-                self.favoriteButton.selected = false
-                self.favoriteCountLabel.text = String(self.tweet!.favoritesCount)
+                dispatch_async(dispatch_get_main_queue()){
+                    self.favoriteButton.selected = false
+                    self.favoriteCountLabel.text = String(self.tweet!.favoritesCount)
+                }
                 }, failure: { (error: NSError) in
                     
             })

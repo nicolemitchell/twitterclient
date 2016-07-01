@@ -6,11 +6,11 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "profile_icon.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "twitterhomeicon.png",
       "scale" : "3x"
     }
   ],

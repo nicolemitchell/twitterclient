@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "twitter.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "profile_icon.png",
       "scale" : "2x"
     },
     {

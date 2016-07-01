@@ -30,6 +30,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = vc
         }
         
+        //Image Background Navigation Bar
+        //let navBackgroundImage:UIImage! = UIImage(named: "twitternavbar.png")
+        //UINavigationBar.appearance().setBackgroundImage(navBackgroundImage, forBarMetrics: .Default)
+        //UINavigationBar.appearance().backgroundColor = UIColor.blueColor()
+    
+        //var nav = self.navigationController?.navigationBar
+        //let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        //imageView.contentMode = .ScaleAspectFit
+        //let image = UIImage(named: "bluebird")
+        //imageView.image = image
+        //UINavigationBar.titleView = imageView
+        
         return true
     }
 
