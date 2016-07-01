@@ -79,17 +79,18 @@ class Tweet: NSObject {
     }
     
     func retweet(success: ()->(), failure: (NSError) ->()) {
+//        TwitterClient.sharedInstance.printRateStatuses()
         TwitterClient.sharedInstance.POST("1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task:NSURLSessionDataTask, response: AnyObject?) in
-            
+            let newTweet = Tweet(dictionary: response as! NSDictionary)
             self.retweetBool = true
-            self.retweetCount += 1
+            self.retweetCount = newTweet.retweetCount
             
             success()
             print ("success")
             
             }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 failure(error)
-                print("error:\(error.localizedDescription)")
+                print("error:\(error)")
                 
         })
         
@@ -97,15 +98,15 @@ class Tweet: NSObject {
     
     func unretweet(success: ()->(), failure: (NSError) ->()) {
         TwitterClient.sharedInstance.POST("1.1/statuses/unretweet/\(id).json", parameters: nil, progress: nil, success: { (task:NSURLSessionDataTask, response: AnyObject?) in
-            
+            let newTweet = Tweet(dictionary: response as! NSDictionary)
             self.retweetBool = false
-            self.retweetCount -= 1
+            self.retweetCount = newTweet.retweetCount
             
             success()
             
             }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 failure(error)
-                print("error:\(error.localizedDescription)")
+                print("error:\(error)")
                 
         })
         
@@ -113,9 +114,9 @@ class Tweet: NSObject {
     
     func favorite(success: ()->(), failure: (NSError) ->()) {
         TwitterClient.sharedInstance.POST("1.1/favorites/create.json?id=\(id)", parameters: nil, progress: nil, success: { (task:NSURLSessionDataTask, response: AnyObject?) in
-            
+            let newTweet = Tweet(dictionary: response as! NSDictionary)
             self.favoriteBool = true
-            self.favoritesCount += 1
+            self.favoritesCount = newTweet.favoritesCount
             
             success()
             
@@ -129,9 +130,9 @@ class Tweet: NSObject {
     
     func unfavorite(success: ()->(), failure: (NSError) ->()) {
         TwitterClient.sharedInstance.POST("1.1/favorites/destroy.json?id=\(id)", parameters: nil, progress: nil, success: { (task:NSURLSessionDataTask, response: AnyObject?) in
-            
+            let newTweet = Tweet(dictionary: response as! NSDictionary)
             self.favoriteBool = false
-            self.favoritesCount -= 1
+            self.favoritesCount = newTweet.favoritesCount
             
             success()
             

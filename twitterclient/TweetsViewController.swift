@@ -38,14 +38,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         loadData()
         
-        
-        
-        //self.FeedTableView.setNeedsLayout()
-        //self.FeedTableView.layoutIfNeeded()
-        
     }
     
     func viewDidAppear() {
+        FeedTableView.reloadData()
+    }
+    
+    func viewWillAppear() {
         FeedTableView.reloadData()
     }
     
@@ -55,7 +54,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
         // Reload the tableView now that there is new data
-        self.FeedTableView.reloadData()
+        loadData()
         
         // Tell the refreshControl to stop spinning
         refreshControl.endRefreshing()
@@ -170,7 +169,23 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             
             detailViewController.tweet = tweet
             
+        
         }
+        
+        
+        if segue.identifier == "feedProfileSegue" {
+            let button = sender as! UIButton
+            var indexPaths = []
+            indexPaths = FeedTableView.indexPathsForRowsInRect(button.frame)!
+            let indexPath = indexPaths[0]
+            let tweet = tweets[indexPath.row]
+            
+            let profileViewController = segue.destinationViewController as! ProfileViewController
+            
+            profileViewController.tweet = tweet
+            
+        }
+        
     }
     
 

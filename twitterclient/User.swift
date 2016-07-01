@@ -17,6 +17,8 @@ class User: NSObject {
     var profileUrl : NSURL?
     var profileURLString: String?
     var tagline: NSString?
+    var profileBannerUrl: NSURL?
+    var profileBannerURLString: String?
     
     var dictionary: NSDictionary?
     
@@ -28,9 +30,12 @@ class User: NSObject {
         print ("string\(profileURLString)")
         if let profileURLString = profileURLString {
             profileUrl = NSURL(string: profileURLString)
-            print("profUrl\(profileUrl)")
         }
         tagline = dictionary["description"] as? String
+        profileBannerURLString = dictionary["profile_banner_url"] as? String
+        if let profileBannerURLString = profileBannerURLString {
+            profileBannerUrl = NSURL(string: profileBannerURLString)
+        }
     }
     
     static var _currentUser: User?

@@ -25,16 +25,20 @@ class TweetCell: UITableViewCell {
     @IBAction func onRetweet(sender: AnyObject) {
         if tweet!.retweetBool == false {
             tweet?.retweet({
-                self.retweetButton.selected = true
-                self.retweetCountLabel.text = String(self.tweet!.retweetCount)
+                dispatch_async(dispatch_get_main_queue()){
+                    self.retweetButton.selected = true
+                    self.retweetCountLabel.text = String(self.tweet!.retweetCount)
+                }
                 }, failure: { (error: NSError) in
                 
                     
             })
         } else {
             tweet?.unretweet({
-                self.retweetButton.selected = false
-                self.retweetCountLabel.text = String(self.tweet!.retweetCount)
+                dispatch_async(dispatch_get_main_queue()){
+                    self.retweetButton.selected = false
+                    self.retweetCountLabel.text = String(self.tweet!.retweetCount)
+                }
                 }, failure: { (error:NSError) in
                     
             })

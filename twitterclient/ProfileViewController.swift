@@ -10,10 +10,38 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    
+    var tweet: Tweet!
+    var user: User!
+    
+    @IBOutlet weak var bannerImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var screennameLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        bannerImageView.layer.zPosition = -2
+        
+        if tweet?.user != nil {
+            user = tweet!.user
+        } else {
+            user = User.currentUser
+        }
+        print(user)
+        if user!.profileBannerURLString != nil {
+            bannerImageView.setImageWithURL(user!.profileBannerUrl!)
+        }
+        profileImageView.setImageWithURL(user!.profileUrl!)
+        nameLabel.text = user!.name as! String
+        screennameLabel.text = "@" + (user!.screenname as! String)
+        descriptionLabel.text = user!.tagline as! String
+        
     }
 
     override func didReceiveMemoryWarning() {
