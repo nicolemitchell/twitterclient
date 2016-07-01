@@ -131,6 +131,12 @@ class DetailViewController: UIViewController {
             profileViewController.tweet = tweet
             
         }
+        if segue.identifier == "detailReplySegue" {
+            let composeViewController = segue.destinationViewController as! ComposeViewController
+            
+            composeViewController.tweet = tweet
+
+        }
         
     }
     

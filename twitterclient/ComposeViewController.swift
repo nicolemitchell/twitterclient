@@ -10,6 +10,12 @@ import UIKit
 
 class ComposeViewController: UIViewController, UITextViewDelegate {
     
+    var tweet: Tweet!
+    
+    @IBOutlet weak var composePlaceholderText: UILabel!
+    
+    @IBOutlet weak var replyPlaceholderText: UILabel!
+    
     @IBOutlet weak var profImageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var characterLabel: UILabel!
@@ -50,12 +56,25 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         profImageView.setImageWithURL((User.currentUser?.profileUrl)!)
         
+
+        
+        if tweet == nil {
+            composePlaceholderText.hidden = false
+            replyPlaceholderText.hidden = true
+        } else {
+            replyPlaceholderText.hidden = false
+            composePlaceholderText.hidden = true
+            textView.text = "@\(tweet.screenname! as! String)"
+        }
     }
     
     func textViewDidChange(textView: UITextView) {
-        print(textView.text.characters.count)
+    
+        composePlaceholderText.hidden = true
+        
+        
         var characterCount = 140 - textView.text.characters.count
-        characterLabel.text = String(characterCount)
+    characterLabel.text = String(characterCount)
         
         if characterCount < 0 {
             characterWarning.hidden = false
